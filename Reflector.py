@@ -7,11 +7,7 @@ class Reflector():
     def find_opposite(self, uValue):
         assert uValue <= 25 and uValue >= 0
         return self.wall[uValue]
-        
-def main():
-    rWall = Reflector()
-     
-    print(rWall.find_opposite(25))
-  
-if __name__== "__main__":
-    main()
+
+
+       
+
