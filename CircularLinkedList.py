@@ -42,20 +42,29 @@ class CircularLinkedList():
         elif self.head.next is self.head:
             print(str(self.head.dataVal)) 
         else:
-            while x < self.size:
+            while x < (self.size-1):
                 print( str(search.dataVal) +" | ", end='')
                 search = search.next
                 x = x + 1
-        print()
+        print("")
     def search(self, target):
         search = self.head
         x = 0
-        while x < self.size:
+        while x < (self.size -1):
                 if target is search.dataVal:
                     return x
                 search = search.next
                 x = x + 1
-
+    def search_by_num(self, number):
+        search = self.head
+        x = 0
+        while x <= number and x < (self.size-1):
+            if x is number:
+                return search.dataVal
+            search = search.next
+            x = x + 1  
+            
+        
     def get_size(self):
         return self.size
     def rotate(self):
