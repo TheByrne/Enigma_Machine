@@ -1,6 +1,6 @@
 class Node():
     def __init__(self, dataVal = None):
-        self.dataVal = dataVal
+        self.dataVal = dataVal[0]
         self.next = None
 class CircularLinkedList():
     def __init__(self):
@@ -40,9 +40,9 @@ class CircularLinkedList():
         if self.head is None:
             print('Empty List ')
         elif self.head.next is self.head:
-            print(str(self.head.dataVal)) 
+            print("| "+str(self.head.dataVal)+" |") 
         else:
-            while x < (self.size-1):
+            while x < (self.size):
                 print( str(search.dataVal) +" | ", end='')
                 search = search.next
                 x = x + 1
@@ -50,15 +50,16 @@ class CircularLinkedList():
     def search(self, target):
         search = self.head
         x = 0
-        while x < (self.size -1):
+        while x <= self.size:
                 if target is search.dataVal:
+                    print("Data: "+str(search.dataVal))
                     return x
                 search = search.next
                 x = x + 1
     def search_by_num(self, number):
         search = self.head
         x = 0
-        while x <= number and x < (self.size-1):
+        while x <= number and x < self.size:
             if x is number:
                 return search.dataVal
             search = search.next
@@ -69,6 +70,7 @@ class CircularLinkedList():
         return self.size
     def rotate(self):
         self.head = self.head.next
+
     def rotate_left(self):
         search = self.head
         x = 0
