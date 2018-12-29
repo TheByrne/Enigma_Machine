@@ -11,7 +11,8 @@ class Enigma():
         self.rotorCenter.set_rotor("rotorII.txt")
         self.rotorRight.set_rotor("rotorIII.txt")
     def traverse_left(self, pInput):
-       self.rotorRight.rotate_right()
+       # self.rotorRight.rotate_right()
+       self.rotate_rotors()
        temp = self.rotorRight.travel_left(pInput)
        print("number coming out oof right: "+str(temp))
        cent = self.rotorCenter.travel_left(temp)
@@ -28,6 +29,18 @@ class Enigma():
         temp = self.rotorRight.travel_right(cent)
         print("number coming out oof right: "+str(temp))
         return temp
+    def rotate_rotors(self):
+        if self.rotorCenter.notch is self.rotorCenter.leftCol.head.dataVal \
+        and self.rotorRight.notch is self.rotorRight.leftCol.head.dataVal:
+            self.rotorCenter.rotate_right()
+            self.rotorRight.rotate_right()
+            self.rotorLeft.rotate_right()
+        elif self.rotorRight.notch is self.rotorRight.leftCol.head.dataVal:
+            self.rotorRight.rotate_right()
+            self.rotorCenter.rotate_right()
+        else:
+            self.rotorRight.rotate_right()
+        
     def display(self):
         print("left")
         self.rotorLeft.display()
