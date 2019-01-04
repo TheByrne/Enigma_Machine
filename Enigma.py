@@ -1,6 +1,7 @@
 import Rotor
 import Reflector
 import Plugboard
+import logging
 class Enigma():
     def __init__(self):
         self.rotorLeft = Rotor.Rotor()
@@ -16,20 +17,20 @@ class Enigma():
        # self.rotorRight.rotate_right()
        self.rotate_rotors()
        temp = self.rotorRight.travel_left(pInput)
-       print("number coming out oof right: "+str(temp))
+       logging.debug("number coming out oof right: "+str(temp))
        cent = self.rotorCenter.travel_left(temp)
-       print("number coming out oof center: "+str(cent))
+       logging.debug("number coming out oof center: "+str(cent))
        temp = self.rotorLeft.travel_left(cent)
-       print("number coming out oof left: "+str(temp))
+       logging.debug("number coming out oof left: "+str(temp))
        return temp
     def traverse_right(self, rInput):
-        print("Traveling Right")
+        logging.debug("Traveling Right")
         temp = self.rotorLeft.travel_right(rInput)
-        print("number coming out oof left: "+str(temp))
+        logging.debug("number coming out oof left: "+str(temp))
         cent = self.rotorCenter.travel_right(temp)
-        print("number coming out oof center: "+str(cent))
+        logging.debug("number coming out oof center: "+str(cent))
         temp = self.rotorRight.travel_right(cent)
-        print("number coming out oof right: "+str(temp))
+        logging.debug("number coming out oof right: "+str(temp))
         return temp
     def rotate_rotors(self):
         if self.rotorCenter.notch is self.rotorCenter.leftCol.head.dataVal \
@@ -44,18 +45,18 @@ class Enigma():
             self.rotorRight.rotate_right()
         
     def display(self):
-        print("left")
+        print("Left")
         self.rotorLeft.display()
         print("Center ")
         self.rotorCenter.display()
-        print("right")
+        print("Right")
         self.rotorRight.display()
         print()
 
 def main():
     turing = Enigma()
     turing.init_Rotors()
-    turing.display()
+    #turing.display()
     sEncrypt = input("Character or 0 to quit ").upper()
     turing.board.get_connections()
     turing.board.connect_plugs()
@@ -70,7 +71,7 @@ def main():
         refl = turing.mirror.find_opposite(temp)
         addChar = turing.traverse_right(refl)
         answer = answer + turing.board.from_enigma(chr(addChar+65))
-        print(answer)
+        print("Your Encryption is: "+answer)
         sEncrypt = input("Character or 0 to quit ").upper()
         encrypt = ord(sEncrypt[0])-65
 

@@ -42,7 +42,9 @@ class Plugboard():
         else:
             return enigmaOutput
     def from_user(self, uInput):
-        return ord(uInput.upper()) - 65
+        uInput = uInput.upper()
+        plugWire = self.from_enigma(uInput)
+        return ord(plugWire) - 65
      
 
         
