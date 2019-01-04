@@ -1,64 +1,49 @@
+import logging
+logging.basicConfig(level=logging.DEBUG, format=' %(asctime)s - \
+- %(message)s')
 class Plugboard():
     def __init__(self):
-        aLetter = {}
-        bLetter = {}
-        cLetter = {}
-        dLetter = {}
-        eLetter = {}
-        fLetter = {}
-        gLetter = {}
-        hLetter = {}
-        iLetter = {}
-        jLetter = {}
-        kLetter = {}
-        lLetter = {}
-        mLetter = {}
-        nLetter = {}
-        oLetter = {}
-        pLetter = {}
-        qLetter = {}
-        rLetter = {}
-        sLetter = {}
-        tLetter = {}
-        uLetter = {}
-        vLetter = {}
-        wLetter = {}
-        xLetter = {}
-        yLetter = {}
-        zLetter = {}
-        self.collection = [aLetter, bLetter, cLetter, dLetter,
-        eLetter, fLetter, gLetter , hLetter ,iLetter , jLetter, 
-        kLetter, lLetter , mLetter , nLetter ,oLetter, pLetter, 
-        qLetter ,rLetter , sLetter , tLetter ,uLetter, vLetter,
-        wLetter ,xLetter , yLetter , zLetter ]
-
-    def connect(self, uInput):
-        assert len(uInput) == 2
-        uOne = uInput[0]
-        uTwo = uInput[1]
-
-        uNumOne = ord(uOne) - 97
-        uNumTwo = ord(uTwo) - 97
+        self.board={}
+        self.connections = None
+    def connect_plugs(self):
+        logging.debug(self.connections)
+        assert self.connections is not None
+        for x in self.connections:
+            logging.debug(x)
+            self.board[x[0]]= x[1]
+            self.board[x[1]]= x[0]
+        logging.debug(self.board)
+    def check_repeats(self):
+        plugs = sorted(self.connections)
+        for x in range(1, len(self.connections)):
+            if plugs[x] == plugs[x-1]:
+                return True
         
-        if not self.collection[uNumOne] and not self.collection[uNumTwo]:
-            self.collection[uNumOne][uOne] = uTwo
-            self.collection[uNumTwo][uNumTwo] = uOne
-        else:    
-            print(str(uOne) + " has a pair or " + str(uTwo) + " has a pair") 
+        return False
+         
     def convert(self, uInput):
         uNum = ord(uInput) - 97
         if self.collection[uNum][uInput]:
             return self.collection[uNum][uInput]
         else:
             return uInput
-    
+    def get_connections(self):
+        uConnections = input("Enter connections \"AB FD PC\" ")
+        uConnections = uConnections.upper()
+        testLength = uConnections.replace(" ", "")
+        self.connections = uConnections.split(" ")
+        
+        if len(testLength) % 2 is not 0:
+            logging.debug('String not correct')
+        logging.debug(self.connections)
+
+     
 
 def main():
-    board = Plugboard()
-    x ='a'
-    board.connect("ab")
-    x = board.convert(x)
-    print(x)
+    test = Plugboard()
+    test.get_connections()
+    test.connect_plugs()
+    logging.debug(test.check_repeats())
   
 if __name__== "__main__":
     main()
