@@ -18,9 +18,7 @@ class Plugboard():
         for x in range(1, len(self.connections)):
             if plugs[x] == plugs[x-1]:
                 return True
-        
         return False
-         
     def convert(self, uInput):
         uNum = ord(uInput) - 97
         if self.collection[uNum][uInput]:
@@ -34,29 +32,18 @@ class Plugboard():
         self.connections = uConnections.split(" ")
         
         if len(testLength) % 2 is not 0:
-            logging.debug('String not correct')
+            logging.critical('String not correct')
         logging.debug(self.connections)
-
+    def from_enigma(self, enigmaOutput):
+        logging.debug(self.board)
+        logging.debug(enigmaOutput)
+        if enigmaOutput in self.board.keys():
+            return self.board[enigmaOutput]
+        else:
+            return enigmaOutput
+    def from_user(self, uInput):
+        return ord(uInput.upper()) - 65
      
 
-def main():
-    test = Plugboard()
-    test.get_connections()
-    test.connect_plugs()
-    logging.debug(test.check_repeats())
+        
   
-if __name__== "__main__":
-    main()
-        
-    # self.wall = ['a', 'b', 'c', 'd', 'e', 'f',
-    #     'g', 'd', 'i', 'j', 'k', 'g', 'm', 
-    #     'k', 'm', 'i', 'e', 'b', 'f', 't',
-    #     'c', 'v', 'v', 'j', 'a', 't']
-    # def find_opposite(uValue):
-    #     assert uValue <= 25 and uValue >= 0
-    #     target = self.wall[uValue]
-    #     wallMax = len(self.wall) -1
-    #     for x in range(uValue, wallMax):
-    #         if self.wall[x] is target:
-    #             return x
-        

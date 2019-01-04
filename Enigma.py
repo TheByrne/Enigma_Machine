@@ -1,11 +1,13 @@
 import Rotor
 import Reflector
+import Plugboard
 class Enigma():
     def __init__(self):
         self.rotorLeft = Rotor.Rotor()
         self.rotorCenter = Rotor.Rotor()
         self.rotorRight = Rotor.Rotor()
         self.mirror = Reflector.Reflector()
+        self.board = Plugboard.Plugboard()
     def init_Rotors(self):
         self.rotorLeft.set_rotor("rotorI.txt")
         self.rotorCenter.set_rotor("rotorII.txt")
@@ -55,17 +57,20 @@ def main():
     turing.init_Rotors()
     turing.display()
     sEncrypt = input("Character or 0 to quit ").upper()
-    encrypt = ord(sEncrypt[0])
-    encrypt = encrypt - 65
+    turing.board.get_connections()
+    turing.board.connect_plugs()
+    # encrypt = ord(sEncrypt[0])
+    # encrypt = encrypt - 65
+    # answer=""
+    # print(encrypt)
     answer=""
-    print(encrypt)
     while sEncrypt[0] is not '0':
+        encrypt = turing.board.from_user(sEncrypt)
         temp = turing.traverse_left(encrypt)
         refl = turing.mirror.find_opposite(temp)
         addChar = turing.traverse_right(refl)
-        answer = answer + chr(addChar+65)
+        answer = answer + turing.board.from_enigma(chr(addChar+65))
         print(answer)
-        turing.display()
         sEncrypt = input("Character or 0 to quit ").upper()
         encrypt = ord(sEncrypt[0])-65
 
