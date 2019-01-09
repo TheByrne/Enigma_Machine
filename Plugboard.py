@@ -25,8 +25,8 @@ class Plugboard():
             return self.collection[uNum][uInput]
         else:
             return uInput
-    def get_connections(self):
-        uConnections = input("Enter connections \"AB FD PC\" ")
+    def get_connections(self, uConnections):
+        # uConnections = input("Enter connections \"AB FD PC\" ")
         uConnections = uConnections.upper()
         testLength = uConnections.replace(" ", "")
         self.connections = uConnections.split(" ")

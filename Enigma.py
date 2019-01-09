@@ -52,28 +52,42 @@ class Enigma():
         print("Right")
         self.rotorRight.display()
         print()
+    def start(self, uString):
+        sEncrypt = uString.upper()
+        encrypt = ord(sEncrypt[0])
+        encrypt = encrypt - 65
+        answer=""
+        encrypt = self.board.from_user(sEncrypt)
+        temp = self.traverse_left(encrypt)
+        refl = self.mirror.find_opposite(temp)
+        addChar = self.traverse_right(refl)
+        answer = answer + self.board.from_enigma(chr(addChar+65))
+        #print("Your Encryption is: "+answer)
+        return answer
 
-def main():
-    turing = Enigma()
-    turing.init_Rotors()
-    #turing.display()
-    sEncrypt = input("Character or 0 to quit ").upper()
-    turing.board.get_connections()
-    turing.board.connect_plugs()
+
+
+# def main():
+#     turing = Enigma()
+#     turing.init_Rotors()
+#     #turing.display()
+#     sEncrypt = input("Character or 0 to quit ").upper()
+#     turing.board.get_connections()
+#     turing.board.connect_plugs()
     # encrypt = ord(sEncrypt[0])
     # encrypt = encrypt - 65
     # answer=""
     # print(encrypt)
-    answer=""
-    while sEncrypt[0] is not '0':
-        encrypt = turing.board.from_user(sEncrypt)
-        temp = turing.traverse_left(encrypt)
-        refl = turing.mirror.find_opposite(temp)
-        addChar = turing.traverse_right(refl)
-        answer = answer + turing.board.from_enigma(chr(addChar+65))
-        print("Your Encryption is: "+answer)
-        sEncrypt = input("Character or 0 to quit ").upper()
-        encrypt = ord(sEncrypt[0])-65
+    # answer=""
+    # while sEncrypt[0] is not '0':
+    #     encrypt = turing.board.from_user(sEncrypt)
+    #     temp = turing.traverse_left(encrypt)
+    #     refl = turing.mirror.find_opposite(temp)
+    #     addChar = turing.traverse_right(refl)
+    #     answer = answer + turing.board.from_enigma(chr(addChar+65))
+    #     print("Your Encryption is: "+answer)
+    #     sEncrypt = input("Character or 0 to quit ").upper()
+    #     encrypt = ord(sEncrypt[0])-65
 
-if __name__== "__main__":
-    main()
+# if __name__== "__main__":
+#     main()
