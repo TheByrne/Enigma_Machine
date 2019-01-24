@@ -34,7 +34,15 @@ def encode(turing):
         answer = answer + machine.start(x)
     turing.set(answer)
 
+def plugConnect():
+    sPlug = simpledialog.askstring("Input", "Enter PlugBoard Connections",
+                                   parent=window)
+    machine.board.get_connections(sPlug)
+    machine.board.connect_plugs()
+
+
 encodeButton = tkinter.Button(window, text='Encode', command=lambda: encode(turing)).grid(row = 2, column=1)
+plugButton = tkinter.Button(window, text='PlugBoard', command=lambda: plugConnect()).grid(row = 3)
 ####
 encrypt = tkinter.Entry(window, textvariable = uInput)
 ####
@@ -43,11 +51,7 @@ encrypt.grid(row=0,column=1)
 
 
 cmd_button = ttk.Button(window, text="Example")
-sPlug = simpledialog.askstring("Input", "Enter PlugBoard Connections",
-                                parent=window)
 
-machine.board.get_connections(sPlug)
-machine.board.connect_plugs()
 
 
 
